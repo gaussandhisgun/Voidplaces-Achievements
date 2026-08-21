@@ -420,6 +420,27 @@ if SERVER then
 		end
 	end)
 
+	RegisterAchievement("downcorridors_stuck", "Like the good old days", "Get softlocked on Down Corridors", function(ply)
+		if game.GetMap() == "vp_downcorridors" then
+			local door1lck = false
+			local door2lck = false
+			local door1 = nil
+			if ply:GetPos():WithinAABox(Vector(1470, -2012, -791), Vector(1773, -2280, -525)) then
+				for _, ent in ents.Iterator() do
+					if ent:GetName() == "bstdoor_friends_phase3" and ent:GetInternalVariable( "m_bLocked" ) then 
+						door1lck = true 
+						door1 = ent
+					end
+					if ent:GetName() == "bstdoor_friends_phase2" and ent:GetInternalVariable( "m_bLocked" ) then door2lck = true end
+				end
+				if door1lck and door2lck then
+					UnlockAchievement(ply, "downcorridors_stuck")
+					door1:Fire("Unlock")
+				end
+			end
+		end
+	end)
+
 end
 
 -- Shared functions (client and server)

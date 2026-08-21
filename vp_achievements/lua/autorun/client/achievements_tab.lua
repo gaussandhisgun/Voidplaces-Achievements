@@ -34,7 +34,8 @@ if CLIENT then
         { id = "whitecorridors_enter", name = "I hate offices", description = "Visit White Corridors",  icon = "icon16/award_star_gold_3.png" },
         { id = "skytech_enter", name = "Why are these guys still using Windows XP anyway?", description = "Visit Skytech",  icon = "icon16/award_star_gold_3.png" },
         { id = "whitecomplex_enter", name = "White Complex? I find it quite simple", description = "Visit White Complex",  icon = "icon16/award_star_gold_3.png" },
-        { id = "deletedsector_oob", name = "You weren't meant to be here, you know? (=", description = "Get out of the map in Deleted Sector", icon = "icon16/award_star_gold_3.png", secret = true}
+        { id = "deletedsector_oob", name = "You weren't meant to be here, you know? (=", description = "Get out of the map in Deleted Sector", icon = "icon16/award_star_gold_3.png", secret = true},
+        { id = "downcorridors_stuck", name = "Like the good old days", description = "Get softlocked on Down Corridors", icon = "icon16/award_star_gold_3.png", secret = true}
     }
 
     -- Table of unlocked achievements
