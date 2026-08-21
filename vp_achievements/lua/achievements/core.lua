@@ -35,17 +35,17 @@ if SERVER then
             end
         end
         -- Create the directory if necessary
-        if not file.IsDir("achievements", "DATA") then
-            file.CreateDir("achievements")
+        if not file.IsDir("vpachievements", "DATA") then
+            file.CreateDir("vpachievements")
         end
-        local fileName = "achievements/" .. string.Replace(sid, ":", "_") .. ".txt"
+        local fileName = "vpachievements/" .. string.Replace(sid, ":", "_") .. ".txt"
         file.Write(fileName, util.TableToJSON(data, true))  -- Save in JSON format
     end
 
     -- Function to load player achievements from file
     local function LoadPlayerAchievements(ply)
         local sid = ply:SteamID()
-        local fileName = "achievements/" .. string.Replace(sid, ":", "_") .. ".txt"
+        local fileName = "vpachievements/" .. string.Replace(sid, ":", "_") .. ".txt"
         if file.Exists(fileName, "DATA") then
             local json = file.Read(fileName, "DATA")
             --print(json)
