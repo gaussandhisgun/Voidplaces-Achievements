@@ -14,19 +14,27 @@ if CLIENT then
 
     -- Here you define the list of achievements, their description, icon and if it is secret
     local ACHIEVEMENTS = {
-        { id = "secret_room",     name = "Secret Zone",            description = "Enter the secret room.",              icon = "icon16/door_open.png" },
-        { id = "dark_room",       name = "Don´t Turn Back",        description = "Enter the dark room.",                icon = "icon16/eye.png" },
-        { id = "light_room",      name = "I can´t see",            description = "Enter the light room.",               icon = "icon16/lightbulb.png" },
-        { id = "lake_dive",       name = "Refreshing!",            description = "Touch the lake water.",               icon = "icon16/water.png" },
-        { id = "mirror_self",     name = "The coolest guy",        description = "Look at yourself in the mirror.",     icon = "icon16/user.png" },
-        { id = "tower_top",       name = "Climbing Up",            description = "Reach the top of the highest tower.", icon = "icon16/arrow_up.png" },
-        { id = "spawn_npc",       name = "My Baby",                description = "Spawn your first NPC.",               icon = "icon16/group.png" },
-        { id = "dark_room_enemy", name = "Unleash the Darkness",   description = "Spawn an enemy in the dark room.",    icon = "icon16/exclamation.png" },
-        { id = "airboat_water",   name = "Ahoy!",                  description = "Drive the airboat on the water.",     icon = "icon16/anchor.png" },
-        { id = "garage_parking",  name = "Perfect Parking",        description = "Park a vehicle inside the garage.",   icon = "icon16/car.png" },
-		{ id = "speed_demon",     name = "Speed Demon",            description = "Achieve over 200 MPH in a vehicle.",  icon = "icon16/fire.png" },
-		{ id = "area_lights",     name = "Defeating the Darkness", description = "Create at least 5 lights in the dark room.",  icon = "icon16/lightbulb_add.png" },
-		{ id = "secret_master",   name = "TRUE Completionist",     description = "Unlock all achievements in one run without using noclip.", icon = "icon16/award_star_gold_3.png", secret = true},
+        { id = "pinkplace_222",   name = "Oh my Sun",              description = "Roll 222 in Fear a Number",  icon = "icon16/award_star_gold_3.png" },
+        { id = "pinkplace_69",   name = "Nice!",              description = "Roll 69 in Fear a Number",  icon = "icon16/award_star_gold_3.png" },
+        { id = "pinkplace_67",   name = "Aint funny",              description = "Die from cringe on Pinkplace",  icon = "icon16/award_star_gold_3.png", secret = true},
+        { id = "voidmall_watched",   name = "Im feeling watched",              description = "Was that cutout always looking this way?",  icon = "icon16/award_star_gold_3.png" },
+        { id = "nowheremall_enter",   name = "This wasn't here before", description = "Enter Nowheremall from Otherside",  icon = "icon16/award_star_gold_3.png" },
+        { id = "otherside_texas_massacre",   name = "Void Chainsaw Massacre", description = "Survive the Simple Man",  icon = "icon16/award_star_gold_3.png" },
+        { id = "wanderer_space", name = "SPAAAAAACE", description = "Wait, there are spaceships in the Void?", icon = "icon16/award_star_gold_3.png"},
+        { id = "struggle_enter", name = "This looks normal", description = "gm_struggle is actually a Voidplaces map",  icon = "icon16/award_star_gold_3.png" },
+        { id = "inno_n_out_number9", name = "I'll have two number 9, a number 9 large...", description = "A number 6 with extra dip, a number 7, two number 45s, one with cheese, and a large soda.",  icon = "icon16/award_star_gold_3.png" },
+        { id = "downstreets_bigbrother", name = "The Big Brother?", description = "Encounter Him on Downstreets",  icon = "icon16/award_star_gold_3.png" },
+        { id = "blue_broadcast_imblue", name = "I'm blue, da ba dee da ba die", description = "Turn off all TVs on Blue Broadcast",  icon = "icon16/award_star_gold_3.png" },
+        { id = "darklight_illumi", name = "Need a hand?", description = "Encounter Illumi",  icon = "icon16/award_star_gold_3.png" },
+        { id = "otherside_uncomplicated_guy", name = "Uncomplicated Guy", description = "Show up in Simple Man's den cosplaying Simple Man",  icon = "icon16/award_star_gold_3.png", secret = true},
+        { id = "pinkplace_backrooms", name = "Its like someone described pink to a dog that has never seen one...", description = "Find a Backrooms reference",  icon = "icon16/award_star_gold_3.png" },
+        { id = "voidmall_illbeback", name = "I'll be back", description = "Disappoint the Innocence",  icon = "icon16/award_star_gold_3.png" },
+        { id = "downcorridors_enter", name = "The Sun is not a lie", description = "But the cake is.",  icon = "icon16/award_star_gold_3.png" },
+        { id = "ucomplex_enter", name = "MEDIC!", description = "Visit the Moonlit Medical Station",  icon = "icon16/award_star_gold_3.png" },
+        { id = "whitecorridors_enter", name = "I hate offices", description = "Visit White Corridors",  icon = "icon16/award_star_gold_3.png" },
+        { id = "skytech_enter", name = "Why are these guys still using Windows XP anyway?", description = "Visit Skytech",  icon = "icon16/award_star_gold_3.png" },
+        { id = "whitecomplex_enter", name = "White Complex? I find it quite simple", description = "Visit White Complex",  icon = "icon16/award_star_gold_3.png" },
+        { id = "deletedsector_oob", name = "You weren't meant to be here, you know? (=", description = "Get out of the map in Deleted Sector", icon = "icon16/award_star_gold_3.png", secret = true}
     }
 
     -- Table of unlocked achievements
@@ -68,44 +76,46 @@ if CLIENT then
 
 		-- Reconstruct each entry
 		for _, ach in ipairs(ACHIEVEMENTS) do
-			local pnl = vgui.Create("DPanel", scroll)
-			pnl:Dock(TOP)
-			pnl:SetTall(64)
-			pnl:DockMargin(5,5,5,0)
-			pnl:DockPadding(8,8,8,8)
-			function pnl:Paint(w, h)
-				derma.SkinHook("Paint", "Panel", self, w, h)
-				surface.SetDrawColor(241, 241, 241, 255)
-				surface.DrawRect(0, 0, w, h)
-				if unlocked[ach.id] then
-					surface.SetDrawColor(255, 215, 0, 255)
-					surface.DrawOutlinedRect(0, 0, w, h)
+			if not ach.secret or unlocked[ach.id] then
+				local pnl = vgui.Create("DPanel", scroll)
+				pnl:Dock(TOP)
+				pnl:SetTall(64)
+				pnl:DockMargin(5,5,5,0)
+				pnl:DockPadding(8,8,8,8)
+				function pnl:Paint(w, h)
+					derma.SkinHook("Paint", "Panel", self, w, h)
+					surface.SetDrawColor(241, 241, 241, 255)
+					surface.DrawRect(0, 0, w, h)
+					if unlocked[ach.id] then
+						surface.SetDrawColor(255, 215, 0, 255)
+						surface.DrawOutlinedRect(0, 0, w, h)
+					end
 				end
+
+				local icon = vgui.Create("DImage", pnl)
+				icon:Dock(LEFT)
+				icon:SetSize(48,48)
+				icon:SetImage(ach.icon)
+				if not unlocked[ach.id] then
+					icon:SetAlpha(100)
+					icon:SetImageColor(Color(100, 100, 100))
+				else
+					icon:SetImageColor(Color(255, 255, 255))
+				end
+
+				local title = vgui.Create("DLabel", pnl)
+				title:Dock(TOP)
+				title:DockMargin(8,0,0,0)
+				title:SetFont("AchievementNameFont")
+				title:SetText(ach.name)
+				title:SetTextColor(Color(102, 102, 102, 255))
+
+				local desc = vgui.Create("DLabel", pnl)
+				desc:Dock(BOTTOM)
+				desc:DockMargin(8,0,0,0)
+				desc:SetFont("AchievementDescFont")
+				desc:SetText(ach.description)
 			end
-
-			local icon = vgui.Create("DImage", pnl)
-			icon:Dock(LEFT)
-			icon:SetSize(48,48)
-			icon:SetImage(ach.icon)
-			if not unlocked[ach.id] then
-				icon:SetAlpha(100)
-				icon:SetImageColor(Color(100, 100, 100))
-			else
-				icon:SetImageColor(Color(255, 255, 255))
-			end
-
-			local title = vgui.Create("DLabel", pnl)
-			title:Dock(TOP)
-			title:DockMargin(8,0,0,0)
-			title:SetFont("AchievementNameFont")
-			title:SetText(ach.name)
-			title:SetTextColor(Color(102, 102, 102, 255))
-
-			local desc = vgui.Create("DLabel", pnl)
-			desc:Dock(BOTTOM)
-			desc:DockMargin(8,0,0,0)
-			desc:SetFont("AchievementDescFont")
-			desc:SetText(ach.description)
 		end
 	end
 
